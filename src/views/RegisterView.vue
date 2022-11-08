@@ -1,5 +1,5 @@
 <template>
-    <h1 class="font-bold">Create an Account</h1>
+    <h1 class="poggers">Create an Account</h1>
     <p><input type="text" placeholder="Email" v-model="email"/></p>
     <p><input type="password" palceholder="Password" v-model="password" /></p>
     <p><button @click="register">Submit</button></p>
