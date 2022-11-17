@@ -9,11 +9,34 @@
               <li class="nav-item"><router-link to="/sign-in">Login</router-link></li>
               <li class="nav-item"><router-link to="/about">About</router-link></li>
             </ul>
+            <button @click = "handleSignOut" v-if="isLoggedIn">Sign Out</button>
           </div>
         </div>
     </nav>
 <router-view/>
 </template>
 
-<style src="../src/css/style.css"/>
-<script src="../node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+<script setup>
+  import { onMounted, ref} from "vue";
+  import { getAuth, onAuthStateChanged, signOut} from "firebase/auth";
+  import router from "./router";
+  const isLoggedIn = ref(false);
+  let auth;
+
+  onMounted(()=>{
+    auth = getAuth();
+    onAuthStateChanged(auth, (user) => {
+      if(user){
+        isLoggedIn.value = true;
+      }else{
+        isLoggedIn.value = false;
+      }
+    });
+  });
+
+  const handleSignOut = () => {
+    signOut(auth).then(()=>{
+      router.push("/");
+    });
+  } 
+</script>
