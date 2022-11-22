@@ -10,6 +10,7 @@ const routes = [
     requiresAuth: true,
   }},
   {path: "/about", component: () => import("../views/AboutView.vue")},
+  {path: "/author", component: () => import("../views/AuthorView.vue")}
 ]
 
 const router = createRouter({

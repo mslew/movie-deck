@@ -8,6 +8,7 @@
               <li class="nav-item"><router-link to="/register">Register</router-link></li>
               <li class="nav-item"><router-link to="/sign-in">Login</router-link></li>
               <li class="nav-item"><router-link to="/about">About</router-link></li>
+              <li class="nav-item"><router-link to="/author">Author</router-link></li>
             </ul>
             <button @click = "handleSignOut" v-if="isLoggedIn">Sign Out</button>
           </div>
