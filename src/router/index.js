@@ -10,7 +10,10 @@ const routes = [
     requiresAuth: true,
   }},
   {path: "/about", component: () => import("../views/AboutView.vue")},
-  {path: "/author", component: () => import("../views/AuthorView.vue")}
+  {path: "/author", component: () => import("../views/AuthorView.vue"),
+  meta:{
+    requiresAuth: true,
+  }}
 ]
 
 const router = createRouter({
