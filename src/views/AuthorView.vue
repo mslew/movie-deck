@@ -15,9 +15,11 @@
     import { db } from "../main"
     import { collection, addDoc } from "firebase/firestore"
     import { ref } from "vue";
+    import { useRouter } from 'vue-router'
     const title = ref("");
     const subtitle = ref("");
     const content = ref("");
+    const router = useRouter()
     let auth;
     let globalUser
     auth = getAuth();
@@ -37,8 +39,8 @@
             title.value = ""
             subtitle.value = ""
             content.value = ""
+            router.push("/feed");
             console.log("Document written with ID: ", docRef.id);
-
         } catch (e) {
             console.error("Error adding document: ", e);
         }

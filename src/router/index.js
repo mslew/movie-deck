@@ -39,7 +39,7 @@ router.beforeEach(async(to, from, next)=>{
     if(await getCurrentUser()){
       next();
     }else{
-      alert("You do not have access yet!");
+      alert("You do not have access yet! Sign in or register to gain access!");
       next("/");
     }
   }else{

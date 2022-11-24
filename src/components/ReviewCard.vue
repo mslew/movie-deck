@@ -5,6 +5,7 @@
             <h6 class="card-subtitle mb-2 text-muted">{{ subtitle }}</h6>
             <p class="card-text">{{ content }}</p>
         </div>
+        <button @click="$emit('removeFromDatabase'), $emit('deleteCard')">Delete</button>
     </div>
 </template>
 

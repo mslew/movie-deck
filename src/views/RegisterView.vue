@@ -18,7 +18,7 @@ import {
     signInWithPopup,
     onAuthStateChanged} from "firebase/auth";
 import { db } from "../main"
-import { collection, addDoc} from "firebase/firestore"
+import { collection, addDoc, getDocs} from "firebase/firestore"
 import { useRouter } from 'vue-router';
 const email = ref("");
 const password = ref("");
@@ -33,8 +33,7 @@ const register = () => {
         onAuthStateChanged(auth, (user) => {
             try {
                 const docRef = addDoc(collection(db, "users"), {
-                    first: first.value,
-                    last: last.value,
+                    name: first.value + last.value,
                     id: user.uid
                 });
                 console.log("Document written with ID: ", docRef.id);
@@ -54,11 +53,22 @@ const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(getAuth(), provider)
     .then((result) => {
+        const auth = getAuth()
+        const user = auth.currentUser
+        try {
+            const docRef = addDoc(collection(db, "users"), {
+                name: user.displayName,
+                id: user.uid
+            }, {merge: true});
+            console.log("Document written with ID: ", docRef.id);
+        }catch(e){
+            console.error("Error adding document: ", e);
+        }
         console.log(result.user);
         router.push("/feed");
     })
     .catch((error) => {
-
+        console.log(error)
     }) 
 };
 
