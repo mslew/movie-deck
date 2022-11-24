@@ -11,18 +11,38 @@
 
 <script>
 import ReviewCard from '../components/ReviewCard.vue'
-
+import { collection, getDocs, query, where } from "firebase/firestore"
+import { db } from "../main"
+import { getAuth } from "firebase/auth"
 export default{
     components:{
         ReviewCard 
     },
     data(){
+        console.log(this.grabData())
         return{
-            reviews: [
-                {id: 1, title: "There Will Be Blood", subtitle:"This is the best bro", content: "I love daniel day lewis"},
-                {id: 1, title: "La La Land", subtitle:"Best love story", content: "California is a cool place to live :)"},
-                {id: 1, title: "Whiplash", subtitle:"Best ending", content: "J.K. Simmons can be a pretty mean dude"}
-            ]
+            reviews: this.grabData()
+        }
+    },
+    methods: {
+        async grabData(){
+            const userID = getAuth().currentUser.uid
+            const q = query(collection(db, "reviews"), where("userID", "==", userID));
+            const querySnapshot = await getDocs(q);
+                let reviews = []
+                querySnapshot.forEach((doc) => {
+                //console.log(doc.id, " => ", doc.data());
+                const review = {
+                    id: doc.id,
+                    title: doc.data().title,
+                    subtitle: doc.data().subtitle,
+                    content: doc.data().content
+
+                }
+                reviews.push(review)
+                return reviews
+            })
+            return querySnapshot
         }
     }
 }

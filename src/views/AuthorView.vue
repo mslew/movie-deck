@@ -11,9 +11,9 @@
 
 <script setup>
 /* eslint-disable no-unused-vars */
-    import { getAuth, onAuthStateChanged, signOut} from "firebase/auth";
+    import { getAuth, onAuthStateChanged } from "firebase/auth";
     import { db } from "../main"
-    import { collection, addDoc} from "firebase/firestore"
+    import { collection, addDoc } from "firebase/firestore"
     import { ref } from "vue";
     const title = ref("");
     const subtitle = ref("");
@@ -34,7 +34,11 @@
                 content: content.value,
                 userID: globalUser.uid
             });
+            title.value = ""
+            subtitle.value = ""
+            content.value = ""
             console.log("Document written with ID: ", docRef.id);
+
         } catch (e) {
             console.error("Error adding document: ", e);
         }
