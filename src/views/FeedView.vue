@@ -1,14 +1,19 @@
 <template>
-    <h1 class="font-bold mb-5">Feed</h1>
-    <ReviewCard
-        v-for="(review, index) in reviews"
-        :key="review.id"
-        :title="review.title"
-        :subtitle="review.subtitle"
-        :content="review.content"
-        v-on:removeFromDatabase="removeFromDatabase(index)"
-        v-on:deleteCard="deleteCard(index)"
-    />
+    <h1 class="font-bold mb-5">|</h1>
+    <h1 class="font-bold mb-3 header">Review Feed</h1>
+    <div class="container float-start">
+        <div class="row">
+            <ReviewCard class="card"
+            v-for="(review, index) in reviews"
+            :key="review.id"
+            :title="review.title"
+            :subtitle="review.subtitle"
+            :content="review.content"
+            v-on:removeFromDatabase="removeFromDatabase(index)"
+            v-on:deleteCard="deleteCard(index)"
+            />
+        </div>
+    </div>
 </template>
 
 <script>
@@ -48,3 +53,16 @@ export default{
     }
 }
 </script>
+
+<style lang="scss">
+@import "../scss/custom";
+  body{
+    background-color: $gray-600;
+  }
+  .header{
+    margin-left: 1rem;
+  }
+  .card{
+    margin-left: 1rem;
+  }
+</style>
