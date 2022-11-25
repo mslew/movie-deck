@@ -2,7 +2,7 @@
     <h1 class="poggers">Sign In To An Account</h1>
     <p><input type="text" placeholder="Email" v-model="email"/></p>
     <p><input type="password" palceholder="Password" v-model="password" /></p>
-    <p v-if="errMsg">{{ errrMsg }}</p>
+    <p v-if="errMsg">{{ errMsg }}</p>
     <p><button @click="signIn">Submit</button></p>
     <p><button @click="signInWithGoogle">Sign In With Google</button></p>
 </template>
@@ -14,12 +14,11 @@ import {
     getAuth, 
     signInWithEmailAndPassword,
     GoogleAuthProvider,
-    signInWithPopup,
-    onAuthStateChanged} from "firebase/auth";
+    signInWithPopup} from "firebase/auth";
 import { useRouter } from 'vue-router';
 const email = ref("");
 const password = ref("");
-const errMsg = ref(); //ERROR MESSAGE
+const errMsg = ref(); 
 const router = useRouter()
 const signIn = () => {
     signInWithEmailAndPassword(getAuth(), email.value, password.value)

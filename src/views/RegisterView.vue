@@ -1,5 +1,5 @@
 <template>
-    <h1 class="poggers">Create an Account</h1>
+    <h1>Create an Account</h1>
     <p><input type="text" placeholder="first name" v-model="first"/></p>
     <p><input type="text" placeholder="last name" v-model="last"/></p>
     <p><input type="text" placeholder="Email" v-model="email"/></p>
@@ -15,52 +15,48 @@ import {
     getAuth, 
     createUserWithEmailAndPassword,
     GoogleAuthProvider,
-    signInWithPopup,
-    onAuthStateChanged} from "firebase/auth";
+    signInWithPopup } from "firebase/auth";
 import { db } from "../main"
-import { collection, addDoc, getDocs} from "firebase/firestore"
+import { setDoc, doc } from "firebase/firestore"
 import { useRouter } from 'vue-router';
 const email = ref("");
 const password = ref("");
 const first = ref("");
 const last = ref("");
 const router = useRouter()
-let auth
 const register = () => {
+    if(email.value == '' || password.value == '' || first.value == '' || last.value == ''){
+        alert("Make sure all fields are filled!")
+    }
     createUserWithEmailAndPassword(getAuth(), email.value, password.value)
-    .then((data) => {
-        auth = getAuth()
-        onAuthStateChanged(auth, (user) => {
-            try {
-                const docRef = addDoc(collection(db, "users"), {
-                    name: first.value + last.value,
-                    id: user.uid
-                });
-                console.log("Document written with ID: ", docRef.id);
-            } catch (e) {
+    .then(async (result) => {
+        const auth = getAuth()
+        const user = auth.currentUser
+        try {
+            await setDoc(doc(db, "users", user.uid), { 
+                name: first.value + " " + last.value});
+            console.log("Document written with ID: ", user.uid);
+        }catch(e){
             console.error("Error adding document: ", e);
-            }
-    });
-        console.log("Registered")
-        router.push('/feed')
+        }
+        console.log(result.user);
+        router.push("/feed");
     })
     .catch((error) => {
-        console.log(error.code);
-    })
+        console.log(error)
+    }) 
 };
 
 const signInWithGoogle = () => {
     const provider = new GoogleAuthProvider();
     signInWithPopup(getAuth(), provider)
-    .then((result) => {
+    .then(async (result) => {
         const auth = getAuth()
         const user = auth.currentUser
         try {
-            const docRef = addDoc(collection(db, "users"), {
-                name: user.displayName,
-                id: user.uid
-            }, {merge: true});
-            console.log("Document written with ID: ", docRef.id);
+            await setDoc(doc(db, "users", user.uid), { 
+                name: user.displayName});
+            console.log("Document written with ID: ", user.uid);
         }catch(e){
             console.error("Error adding document: ", e);
         }
@@ -74,3 +70,7 @@ const signInWithGoogle = () => {
 
 /* eslint-enable no-unused-vars */ 
 </script>
+
+<style>
+    
+</style>

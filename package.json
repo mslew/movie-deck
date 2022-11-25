@@ -9,13 +9,15 @@
     "dev": "concurrently --kill-others \"vue-cli-service serve\" \"sass --watch src/scss:src/css\""
   },
   "dependencies": {
+    "autoprefixer": "^10.4.13",
     "bootstrap": "^5.2.2",
-    "concurrently": "^7.5.0",
+    "concurrently": "^7.6.0",
     "core-js": "^3.8.3",
     "firebase": "^9.13.0",
     "font-awesome": "^4.7.0",
+    "postcss": "^8.4.19",
     "postcss-cli": "^10.0.0",
-    "sass": "^1.56.0",
+    "sass": "^1.56.1",
     "vue": "^3.2.13",
     "vue-router": "^4.0.3"
   },
@@ -26,10 +28,8 @@
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
-    "autoprefixer": "^10.4.13",
     "eslint": "^7.32.0",
-    "eslint-plugin-vue": "^8.0.3",
-    "postcss": "^8.4.18"
+    "eslint-plugin-vue": "^8.0.3"
   },
   "eslintConfig": {
     "root": true,

@@ -1,5 +1,5 @@
 <template>
-    <div class="card" style="width: 18rem;">
+    <div class="card mb-3" style="width: 18rem;">
         <div class="card-body">
             <h3 class="card-title">{{ title }}</h3>
             <h6 class="card-subtitle mb-2 text-muted">{{ subtitle }}</h6>
@@ -19,3 +19,7 @@ export default{
     ]
 }
 </script>
+
+<style scoped>
+    
+</style>
