@@ -3,8 +3,9 @@ import App from './App.vue'
 import router from './router'
 import { initializeApp } from "firebase/app"
 import { getFirestore } from "firebase/firestore";
-import "./css/style.css"
+import "bootstrap/dist/css/bootstrap.css"
 import "bootstrap/dist/js/bootstrap.min.js"
+import "font-awesome/css/font-awesome.css"
 
 const firebaseConfig = {
 
