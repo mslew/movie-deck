@@ -2,8 +2,6 @@
 node_modules
 /dist
 
-src/css/*.css
-src/css/*.css.map
 
 # local env files
 .env.local
