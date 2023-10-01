@@ -2,7 +2,7 @@
     <h1 class="font-bold mb-5">|</h1>
     <div class="container">
         <div class="row d-flex justify-content-center text-center">
-            <div class="col">
+            <div class="col ">
                 <div class="card">
                     <div class="card-body mx-auto mt-2">
                         <h1>Create an Account</h1>
